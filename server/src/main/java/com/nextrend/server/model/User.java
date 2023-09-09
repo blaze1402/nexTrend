@@ -1,4 +1,4 @@
-package com.nextrend.model;
+package com.nextrend.server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -9,6 +9,7 @@ import java.util.List;
 
 
 @Entity
+@Table(name = "\"user\"")
 public class User {
 
     @Id

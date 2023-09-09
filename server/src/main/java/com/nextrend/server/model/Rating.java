@@ -1,4 +1,4 @@
-package com.nextrend.model;
+package com.nextrend.server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,35 +6,37 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Review {
+@Table(name = "rating")
+public class Rating {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String review;
-
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "rating")
+    private double rating;
 
     private LocalDateTime createdAt;
 
-    public Review() {
+    public Rating() {
 
     }
 
-    public Review(Long id, String review, Product product, User user, LocalDateTime createdAt) {
+    public Rating(Long id, User user, Product product, double rating, LocalDateTime createdAt) {
         super();
         this.id = id;
-        this.review = review;
-        this.product = product;
         this.user = user;
+        this.product = product;
+        this.rating = rating;
         this.createdAt = createdAt;
     }
 
@@ -46,12 +48,12 @@ public class Review {
         this.id = id;
     }
 
-    public String getReview() {
-        return review;
+    public User getUser() {
+        return user;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Product getProduct() {
@@ -62,12 +64,12 @@ public class Review {
         this.product = product;
     }
 
-    public User getUser() {
-        return user;
+    public double getRating() {
+        return rating;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public LocalDateTime getCreatedAt() {

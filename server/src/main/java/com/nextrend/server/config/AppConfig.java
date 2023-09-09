@@ -1,4 +1,4 @@
-package com.nextrend.config;
+package com.nextrend.server.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;

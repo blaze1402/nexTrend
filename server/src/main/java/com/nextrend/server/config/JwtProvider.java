@@ -1,4 +1,4 @@
-package com.nextrend.config;
+package com.nextrend.server.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

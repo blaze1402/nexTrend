@@ -1,4 +1,4 @@
-package com.nextrend.model;
+package com.nextrend.server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

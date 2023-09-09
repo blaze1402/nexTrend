@@ -1,4 +1,4 @@
-package com.nextrend.model;
+package com.nextrend.server.model;
 
 public class Size {
 
