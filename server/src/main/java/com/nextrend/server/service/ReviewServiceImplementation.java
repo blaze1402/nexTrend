@@ -40,7 +40,7 @@ public class ReviewServiceImplementation implements ReviewService {
     }
 
     @Override
-    public List<Review> getAllProductReview(Long productId) {
+    public List<Review> getProductReviews(Long productId) {
 
         return reviewRepository.getAllProductReviews(productId);
     }

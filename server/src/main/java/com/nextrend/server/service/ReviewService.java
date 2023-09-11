@@ -11,6 +11,6 @@ public interface ReviewService {
 
     public Review createReview(ReviewRequest req, User user) throws ProductException;
 
-    public List<Review> getAllProductReview(Long productId);
+    public List<Review> getProductReviews(Long productId);
 
 }
