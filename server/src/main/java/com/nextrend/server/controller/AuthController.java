@@ -2,10 +2,12 @@ package com.nextrend.server.controller;
 
 import com.nextrend.server.config.JwtProvider;
 import com.nextrend.server.exception.UserException;
+import com.nextrend.server.model.Cart;
 import com.nextrend.server.model.User;
 import com.nextrend.server.repository.UserRepository;
 import com.nextrend.server.request.LoginRequest;
 import com.nextrend.server.response.AuthResponse;
+import com.nextrend.server.service.CartService;
 import com.nextrend.server.service.CustomUserServiceImplementation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +34,14 @@ public class AuthController {
 
     private CustomUserServiceImplementation customUserService;
 
-    public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomUserServiceImplementation customUserService) {
+    private CartService cartService;
+
+    public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomUserServiceImplementation customUserService, CartService cartService) {
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
         this.passwordEncoder = passwordEncoder;
         this.customUserService = customUserService;
+        this.cartService = cartService;
     }
 
     @PostMapping("/signup")
@@ -60,6 +65,7 @@ public class AuthController {
         createdUser.setLastName(lastName);
 
         User savedUser = userRepository.save(createdUser);
+        Cart cart = cartService.createCart(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
