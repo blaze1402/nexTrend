@@ -26,15 +26,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private JwtProvider jwtProvider;
+    private final JwtProvider jwtProvider;
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    private CustomUserServiceImplementation customUserService;
+    private final CustomUserServiceImplementation customUserService;
 
-    private CartService cartService;
+    private final CartService cartService;
 
     public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomUserServiceImplementation customUserService, CartService cartService) {
         this.userRepository = userRepository;

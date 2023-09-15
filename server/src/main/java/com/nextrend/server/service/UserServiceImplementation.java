@@ -11,8 +11,8 @@ import java.util.Optional;
 @Service
 public class UserServiceImplementation implements UserService {
 
-    private UserRepository userRepository;
-    private JwtProvider jwtProvider;
+    private final UserRepository userRepository;
+    private final JwtProvider jwtProvider;
 
     public UserServiceImplementation(UserRepository userRepository, JwtProvider jwtProvider) {
         this.userRepository = userRepository;

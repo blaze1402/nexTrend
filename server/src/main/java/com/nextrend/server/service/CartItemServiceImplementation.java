@@ -15,9 +15,9 @@ import java.util.Optional;
 @Service
 public class CartItemServiceImplementation implements CartItemService {
 
-    private CartItemRepository cartItemRepository;
-    private UserService userService;
-    private CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
+    private final UserService userService;
+    private final CartRepository cartRepository;
 
     public CartItemServiceImplementation(CartItemRepository cartItemRepository, UserService userService, CartRepository cartRepository) {
         this.cartItemRepository = cartItemRepository;

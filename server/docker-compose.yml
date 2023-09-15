@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  web:
+    build: .
+    restart: always
+    ports:
+      - "5454:8080"
+    depends_on:
+      - postgresql_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql_db:5432/nextrend
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - nextrend_network
+
+  postgresql_db:
+    image: "postgres:15-alpine3.17"
+    restart: always
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_DB: nextrend
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    networks:
+      - nextrend_network
+
+networks:
+  nextrend_network:

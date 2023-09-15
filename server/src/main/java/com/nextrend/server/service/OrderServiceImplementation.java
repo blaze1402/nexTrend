@@ -16,12 +16,12 @@ import java.util.Optional;
 @Service
 public class OrderServiceImplementation implements OrderService {
 
-    private OrderRepository orderRepository;
-    private AddressRepository addressRepository;
-    private UserRepository userRepository;
-    private OrderItemService orderItemService;
-    private OrderItemRepository orderItemRepository;
-    private CartService cartService;
+    private final OrderRepository orderRepository;
+    private final AddressRepository addressRepository;
+    private final UserRepository userRepository;
+    private final OrderItemService orderItemService;
+    private final OrderItemRepository orderItemRepository;
+    private final CartService cartService;
 
     public OrderServiceImplementation(OrderRepository orderRepository, AddressRepository addressRepository, UserRepository userRepository, OrderItemService orderItemService, OrderItemRepository orderItemRepository, CartService cartService) {
         this.orderRepository = orderRepository;

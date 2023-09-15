@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class RatingServiceImplementation implements RatingService{
 
-    private RatingRepository ratingRepository;
-    private ProductService productService;
+    private final RatingRepository ratingRepository;
+    private final ProductService productService;
 
     public RatingServiceImplementation(RatingRepository ratingRepository, ProductService productService) {
         this.ratingRepository = ratingRepository;
