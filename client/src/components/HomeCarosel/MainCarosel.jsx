@@ -1,10 +1,8 @@
 import React from 'react'
 
-function MainCarosel() {
+const MainCarosel = () => {
   return (
-    <div>
-      
-    </div>
+    <div>MainCarosel</div>
   )
 }
 
