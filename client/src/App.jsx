@@ -11,5 +11,5 @@ const App = () => {
     </div>
   )
 }
-
-export default Appclear
+export default App 
+// export default Appclear
