@@ -3,48 +3,64 @@ import AliceCarousel from 'react-alice-carousel';
 import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 
-const HomeSectionCarosel = () => {
+const HomeSectionCarosel = ({data,SectionName}) => {
+    const [activeIndex, setActiveIndex] = useState(0);
     const responsive = {
         0: { items: 1 },
         720: { items: 3 },
         1024: { items: 5.5 },
+
     };
 
-    const items = [1, 1, 1, 1, 1].map((item, index) => (
-        <HomeSectionCard key={index} />
+    const items = data.slice(0,6).map((item, index) => (
+        <HomeSectionCard key={index} product={item} />
     ));
+    const slidePrev = () => setActiveIndex(activeIndex - 1);
+    const slideNext = () => setActiveIndex(activeIndex + 1);
 
+    const syncActiveIndex = ({ item }) => setActiveIndex(item);
     return (
-        <div className='border border-black'>
-             <div className='relative p-5 border'>
+        <div className=''>
+            <h2 className='text-2xl font-extrabold text-gray-800'> {SectionName}</h2>
+            <div className='relative p-5'>
                 <AliceCarousel
 
                     items={items}
                     disableButtonsControls
-                    autoPlayInterval={1000}
-                    infinite
+                    // autoPlayInterval={1000}
+                    // infinite
                     responsive={responsive}
                     disableDotsControls
+                    onSlideChange={syncActiveIndex}
+                    activeIndex={activeIndex}
                 />
-                <Button variant="contained " className='z-50'
+                {activeIndex !== items.length - 5 &&
+                    <Button variant="contained " className='z-50'
+                        onClick={slideNext}
+                        sx={{
+                            position: 'absolute',
+                            top: "8rem", right: "-4rem", transform: "translateX(-50%) rotate(90deg)"
+                        }} aria-label='next'>
+                        <KeyboardArrowLeftIcon sx={{ transform: "rotate(90deg)" }} />
+                    </Button>}
+                { activeIndex !==0 && <Button variant="contained " className='z-50' onClick={slidePrev}
                     sx={{
                         position: 'absolute',
-                        top: "8rem", right: "0rem", transform: "translateX(50%) rotate(90deg)"
+                        top: "8rem", left: "-4rem", transform: "translateX(50%) rotate(90deg)"
                     }} aria-label='next'>
-                    <KeyboardArrowLeftIcon sx={{ transform:"rotate(90deg)" }} />
-                </Button>
-                <Button variant="contained " className='z-50'
-                    sx={{
-                        position: 'absolute',
-                        top: "8rem", left: "0rem", transform: "translateX(50%) rotate(90deg)"
-                    }} aria-label='next'>
-                    <KeyboardArrowLeftIcon sx={{ transform:"rotate(-90deg)" }} />
-                </Button>
+                    <KeyboardArrowLeftIcon sx={{ transform: "rotate(-90deg)" }} />
+                </Button>}
             </div>
         </div>
     );
 };
 
+HomeSectionCarosel.propTypes = {
+    data: PropTypes.object.isRequired,
+    SectionName: PropTypes.object.isRequired, // Assuming product is an object, adjust the type accordingly
+};
 export default HomeSectionCarosel;
