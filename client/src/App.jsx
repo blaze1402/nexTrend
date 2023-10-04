@@ -4,18 +4,25 @@ import Product from "./components/Product/Product"
 import ProductDetails from "./components/ProductDetails/ProductDetails"
 // import HomePage from "./pages/HomePage/HomePage"
 import HomePage from "./pages/HomePage/HomePage"
-import Cart from "./components/Cart/Cart"
-
+import Checkout from "./components/Checkout/Checkout"
+import { Route,Routes } from "react-router-dom"
+import DeliveryAddressForm from "./components/Checkout/DeliveryAddressForm"
+import Order from "./components/Order/Order"
+import OrderDetails from "./components/Order/OrderDetails"
+import CustomerRouters from "./Routers/CustomerRouters"
 const App = () => {
   return (
-    <div>
-      <Navigation/>
-      
-      <Product/>
-      <ProductDetails/>
-      <Footer/>
-      <HomePage/>
-      <Cart/>
+    <div className="">
+  
+<Routes>
+  <Route path="/*" element={<CustomerRouters/>}></Route>
+</Routes>
+
+
+
+
+
+
     </div>
   )
 }
