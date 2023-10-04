@@ -1,9 +1,14 @@
+import { Routes, Route } from "react-router-dom"
+
+import AdminRouters from "./Routers/AdminRouters"
+
 const App = () => {
   return (
     <div>
-      <h1 className="text-3xl font-extrabold text-center text-red-500">
-        Hello world!111<br /><br />This is nexTrend! <br /><br  /> <span className="text-blue-500">Elevate your style, embrace the future 🚀</span>
-      </h1>
+      <Routes>
+        {/* <Route path="/*" element={<CustomerRouters />}></Route> */}
+        <Route path="/admin/*" element={<AdminRouters />} />
+      </Routes>
     </div>
   )
 }
