@@ -1,26 +1,26 @@
 import { Button, Grid, TextField } from '@mui/material'
-import React from 'react'
-import AddressCard from '../AddressCard/AddressCard'
 import Box from '@mui/material/Box';
+
+import AddressCard from '../AddressCard/AddressCard'
 
 const DeliveryAddressForm = () => {
 
-    const handleSubmit=(e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
-        
-        const data=new FormData(e.currentTarget);
 
-        const address={
-            firstName:data.get("firstName"),
-            lastName:data.get('lastName'),
-            streetAddress:data.get('address'),
-            city:data.get('city'),
-            state:data.get('state'),
-            zip:data.get('zip'),
-            mobile:data.get('phoneNumber')
+        const data = new FormData(e.currentTarget);
+
+        const address = {
+            firstName: data.get("firstName"),
+            lastName: data.get('lastName'),
+            streetAddress: data.get('address'),
+            city: data.get('city'),
+            state: data.get('state'),
+            zip: data.get('zip'),
+            mobile: data.get('phoneNumber')
         }
 
-        console.log('address',address) 
+        console.log('address', address)
     }
     return (
         <div>
@@ -128,23 +128,18 @@ const DeliveryAddressForm = () => {
                                 </Grid>
 
                                 <Grid item xs={12} sm={6}>
-                                    <Button 
-                                    sx={{py:1, mt: 2, bgcolor: "RGB(145 85 253)" }}
-                                    size='large' 
-                                    variant='contained'
-                                    type='submit'>
+                                    <Button
+                                        sx={{ py: 1, mt: 2, bgcolor: "RGB(145 85 253)" }}
+                                        size='large'
+                                        variant='contained'
+                                        type='submit'>
                                         Deliver Here
                                     </Button>
                                 </Grid>
 
-
-
-
                             </Grid>
                         </form>
-
                     </Box>
-
                 </Grid>
             </Grid>
         </div>

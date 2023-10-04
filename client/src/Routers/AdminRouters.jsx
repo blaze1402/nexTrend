@@ -5,9 +5,9 @@ import Admin from '../admin/Admin'
 const AdminRouters = () => {
   return (
     <div>
-        <Routes>
-            <Route path="/*" element={<Admin />}></Route>
-        </Routes>
+      <Routes>
+        <Route path="/*" element={<Admin />}></Route>
+      </Routes>
     </div>
   )
 }

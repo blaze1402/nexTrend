@@ -6,6 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useLocation } from 'react-router-dom';
+
 import DeliveryAddressForm from './DeliveryAddressForm';
 import OrderSummary from './OrderSummary';
 
@@ -13,18 +14,12 @@ const steps = ['Login', 'Delivery Address', 'Order Summary', 'Payment'];
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const location=useLocation();
-  const querySearch=new URLSearchParams(location.search)
+  const location = useLocation();
+  const querySearch = new URLSearchParams(location.search)
 
-  const step=querySearch.get('step')
+  const step = querySearch.get('step')
 
-
-
-  
   const handleNext = () => {
-    
-    
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -32,14 +27,13 @@ export default function Checkout() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-
   return (
     <div className='px-10 lg:px-20 pt-5'><Box sx={{ width: '100%' }}>
       <Stepper activeStep={step}>
-        {steps.map((label, index) => {
+        {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
-        
+
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
@@ -52,12 +46,9 @@ export default function Checkout() {
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
           </Typography>
-          
         </React.Fragment>
       ) : (
         <React.Fragment>
-          
-
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
@@ -67,13 +58,10 @@ export default function Checkout() {
             >
               Back
             </Button>
-            
-
-            
           </Box>
 
           <div className='mt-10'>
-            {step==2?<DeliveryAddressForm/>:<OrderSummary/>}
+            {step == 2 ? <DeliveryAddressForm /> : <OrderSummary />}
           </div>
         </React.Fragment>
       )}

@@ -1,14 +1,14 @@
-
 import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
-import ProductCard from './ProductCard'
-import { mens_kurta } from '../../Data/mens_kurta'
-import { filters, singleFilter } from './FilterData'
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import { Radio, RadioGroup } from '@mui/material'
+import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
+
+import { filters, singleFilter } from './FilterData'
+import ProductCard from './ProductCard'
+import { mens_kurta } from '../../Data/mens_kurta'
 
 const sortOptions = [
     { name: 'Price: Low to High', href: '#', current: false },
@@ -213,13 +213,13 @@ export default function Product() {
                                                                     defaultValue="female"
                                                                     name="radio-buttons-group"
                                                                 >
-                                                                    {section.options.map((option, optionIdx) => (
+                                                                    {section.options.map((option) => (
                                                                         <FormControlLabel
                                                                             key={option.value}
                                                                             value={option.value}
                                                                             control={<Radio />}
                                                                             label={option.label}
-                                                                            
+
                                                                         />
                                                                     ))}
                                                                 </RadioGroup>

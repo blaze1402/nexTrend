@@ -1,6 +1,4 @@
-// import React from 'react'
 import PropTypes from 'prop-types';
-
 
 const HomeSectionCard = ({ product }) => {
     return (
@@ -18,4 +16,5 @@ const HomeSectionCard = ({ product }) => {
 HomeSectionCard.propTypes = {
     product: PropTypes.object.isRequired, // Assuming product is an object, adjust the type accordingly
 };
+
 export default HomeSectionCard

@@ -1,8 +1,9 @@
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import { mainCarouselData } from './MainCaroselData';
 
-const MainCarosel = () => {
+import { mainCarouselData } from './MainCarouselData';
+
+const MainCarousel = () => {
   const items = mainCarouselData.map((item, index) => (
     <img
       key={index} // Use a unique identifier if available
@@ -24,4 +25,4 @@ const MainCarosel = () => {
   );
 };
 
-export default MainCarosel;
+export default MainCarousel;

@@ -1,13 +1,12 @@
-// import React from 'react';
 import AliceCarousel from 'react-alice-carousel';
-import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 
-const HomeSectionCarosel = ({data,SectionName}) => {
+const HomeSectionCarousel = ({ data, SectionName }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const responsive = {
         0: { items: 1 },
@@ -16,7 +15,7 @@ const HomeSectionCarosel = ({data,SectionName}) => {
 
     };
 
-    const items = data.slice(0,6).map((item, index) => (
+    const items = data.slice(0, 6).map((item, index) => (
         <HomeSectionCard key={index} product={item} />
     ));
     const slidePrev = () => setActiveIndex(activeIndex - 1);
@@ -47,7 +46,7 @@ const HomeSectionCarosel = ({data,SectionName}) => {
                         }} aria-label='next'>
                         <KeyboardArrowLeftIcon sx={{ transform: "rotate(90deg)" }} />
                     </Button>}
-                { activeIndex !==0 && <Button variant="contained " className='z-50' onClick={slidePrev}
+                {activeIndex !== 0 && <Button variant="contained " className='z-50' onClick={slidePrev}
                     sx={{
                         position: 'absolute',
                         top: "8rem", left: "-4rem", transform: "translateX(50%) rotate(90deg)"
@@ -59,8 +58,8 @@ const HomeSectionCarosel = ({data,SectionName}) => {
     );
 };
 
-HomeSectionCarosel.propTypes = {
+HomeSectionCarousel.propTypes = {
     data: PropTypes.object.isRequired,
     SectionName: PropTypes.object.isRequired, // Assuming product is an object, adjust the type accordingly
 };
-export default HomeSectionCarosel;
+export default HomeSectionCarousel;

@@ -1,5 +1,4 @@
-import { Grid, Box, Avatar, Rating} from '@mui/material'
-import React from 'react'
+import { Grid, Box, Avatar, Rating } from '@mui/material'
 
 const ProductReviewCard = () => {
     return (
@@ -7,7 +6,7 @@ const ProductReviewCard = () => {
             <Grid container spacing={2} gap={3}>
                 <Grid item xs={1}>
                     <Box>
-                        <Avatar className='text:white' sx={{width:56,height:56,bgcolor:'#9155fd'}}>
+                        <Avatar className='text:white' sx={{ width: 56, height: 56, bgcolor: '#9155fd' }}>
                             R
                         </Avatar>
                     </Box>

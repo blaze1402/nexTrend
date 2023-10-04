@@ -1,5 +1,5 @@
-// import React from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes
+
 import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
@@ -29,12 +29,12 @@ const ProductCard = ({ product }) => {
 
 // Add propTypes validation
 ProductCard.propTypes = {
-  product: PropTypes.shape({
-    imageUrl: PropTypes.string.isRequired,
-    brand: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  }).isRequired,
+    product: PropTypes.shape({
+        imageUrl: PropTypes.string.isRequired,
+        brand: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 export default ProductCard;

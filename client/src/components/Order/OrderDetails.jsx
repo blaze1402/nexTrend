@@ -1,9 +1,9 @@
-import React from 'react'
-import AddressCard from '../AddressCard/AddressCard'
-import OrderTracker from './OrderTracker'
 import { Box, Grid } from '@mui/material'
 import { deepPurple } from '@mui/material/colors'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+
+import AddressCard from '../AddressCard/AddressCard'
+import OrderTracker from './OrderTracker'
 
 const OrderDetails = () => {
     return (
@@ -18,7 +18,7 @@ const OrderDetails = () => {
             </div>
 
             <Grid className='space-y-5' container>
-                {[1, 1, 1, 1, 1].map((item) => <Grid item container className='shadow-xl rounded-md p-5 border' sx={{ alignItems: "center", justifyContent: 'space-between' }}>
+                {[1, 1, 1, 1, 1].map((item) => <Grid key={item} item container className='shadow-xl rounded-md p-5 border' sx={{ alignItems: "center", justifyContent: 'space-between' }}>
 
                     <Grid item xs={6}>
 
