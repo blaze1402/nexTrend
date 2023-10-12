@@ -1,23 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
-import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  ShoppingBagIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Avatar, Button, Menu, MenuItem } from "@mui/material";
-// import { navigation } from "../../../config/navigationMenu";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deepPurple } from "@mui/material/colors";
+import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Avatar, Button, Menu, MenuItem } from "@mui/material";
+import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon, } from "@heroicons/react/24/outline";
+
 import { navigation } from "./navigationData";
 import AuthModal from "../../Auth/AuthModal";
-import { useDispatch, useSelector } from "react-redux";
 import { getUser, logout } from "../../State/Auth/Action";
-// import { getUser, logout } from "../../../Redux/Auth/Action";
-// import { getCart } from "../../../Redux/Customers/Cart/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -40,7 +31,7 @@ export default function Navigation() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleCloseUserMenu = (event) => {
+  const handleCloseUserMenu = () => {
     setAnchorEl(null);
   };
 
@@ -61,7 +52,7 @@ export default function Navigation() {
     if (jwt) {
       dispatch(getUser(jwt))
     }
-  }, [jwt, auth.jwt])
+  }, [jwt, auth.jwt, dispatch])
 
   useEffect(() => {
     if (auth.user) {
@@ -75,15 +66,14 @@ export default function Navigation() {
   const handleLogout = () => {
     handleCloseUserMenu();
     dispatch(logout());
-    handleCloseUserMenu();
-  };
+    navigate("/")
+  }
 
   const handleMyOrderClick = () => {
     handleCloseUserMenu()
     navigate("/account/order")
   }
 
-  const isUserLoggedIn = true;
   return (
     <div className="bg-white pb-10">
       {/* Mobile menu */}
@@ -434,17 +424,14 @@ export default function Navigation() {
                       <Menu
                         id="basic-menu"
                         anchorEl={anchorEl}
+                        open={openUserMenu}
+                        onClose={handleCloseUserMenu}
                         MenuListProps={{
                           "aria-labelledby": "basic-button",
                         }}
                       >
-                        <MenuItem  >
-                          Profile
-                        </MenuItem>
-
-                        <MenuItem >
-                          My Orders
-                        </MenuItem>
+                        <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+                        <MenuItem onClick={handleMyOrderClick}>My Orders</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </Menu>
                     </div>
