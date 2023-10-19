@@ -263,7 +263,7 @@ export default function Navigation() {
 
                 <span className="sr-only">nexTrend</span>
                 <img
-                  src="./nextrend-logo.png"
+                  src="/nextrend-logo.png"
                   alt="nexTrend"
                   className="h-10 mr-2"
                 />
