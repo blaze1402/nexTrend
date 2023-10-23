@@ -63,7 +63,7 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
-  const [selectedSize, setSelectedSize] = useState("")
+  const [selectedSize, setSelectedSize] = useState("M")
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { product } = useSelector(store => store)
@@ -71,7 +71,6 @@ export default function ProductDetails() {
 
   const handleAddToCart = () => {
     const data = { productId: params.productId, size: selectedSize }
-    console.log(data)
     dispatch(addToCart(data))
     navigate('/cart')
   }

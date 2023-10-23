@@ -2,44 +2,85 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const CartItem = () => {
+import { removeCartItem, updateCartItem } from '../../State/Cart/Action';
+
+const CartItem = ({ item }) => {
+  const dispatch = useDispatch()
+
+  const handleUpdateCartItem = (num) => {
+    const data = { data: { quantity: item.quantity + num }, cartItemId: item?.id }
+    dispatch(updateCartItem(data))
+    console.log(data, num)
+  }
+
+  const handleRemoveCartItem = () => {
+    dispatch(removeCartItem(item.id))
+  }
+
   return (
     <div className='p-5 shadow-lg border rounded-md'>
       <div className='flex items-center'>
-        <div className='w-[5rem] h-[5rem] lg:w-[9rem] lg:h-[9rem]'>
-          <img className='w-full h-full object-cover object-top' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTaoXbraFdSm-zxJ_Xm4_eV5LMhHal6AHa2w&usqp=CAU" alt="Error" />
-        </div>
+        <Link to={`/product/${item.product.id}`}>
+          <div className='w-[5rem] h-[5rem] lg:w-[9rem] lg:h-[9rem]'>
+            <img className='w-full h-full object-cover object-top' src={item.product.imageUrl} alt={item.product.title} />
+          </div>
+        </Link>
 
         <div className='ml-5 space-y-1'>
-          <p className='font-semibold'>Men Slim Black Jeans</p>
-          <p className='opacity-70'>Size L,White</p>
-          <p className='opacity-70 mt-2'>Seller: Goldie Fashion</p>
+          <Link to={`/product/${item.product.id}`}>
+            <p className='font-semibold'>{item.product.title}</p>
+          </Link>
+          <p className='opacity-70'>Size {item.size}, {item.product.color}</p>
+          <p className='opacity-70 mt-2'>Seller: {item.product.brand}</p>
           <div className='flex space-x-5 items-center text-gray-900 pt-6'>
-            <p className='opacity-50 line-through'>$122</p>
-            <p className='font-semibold'>$99</p>
-            <p className='text-green-600 font-semibold'>5% Off</p>
+            <p className='opacity-50 line-through'>₹{item.price}</p>
+            <p className='font-semibold'>₹{item.discountedPrice}</p>
+            <p className='text-green-600 font-semibold'>{item.product.discountPercent}% Off</p>
           </div>
-          
+
           <div className='lg:flex items-center lg:space-x-10 pt-4'>
             <div className='flex items-center space-x-2'>
-              <IconButton>
+              <IconButton onClick={() => handleUpdateCartItem(-1)} disabled={item.quantity <= 1}>
                 <RemoveCircleOutlineIcon />
               </IconButton>
-              <span className='py-1 px-7 border rounded-sm'>3</span>
-              <IconButton sx={{ color: "RGB{145 85 253}" }}>
+              <span className='py-1 px-7 border rounded-sm'>{item.quantity}</span>
+              <IconButton
+                sx={{ color: "RGB{145 85 253}" }}
+                onClick={() => handleUpdateCartItem(1)}
+              >
                 <AddCircleOutlineIcon />
               </IconButton>
             </div>
             <div>
-              <Button sx={{ color: "RGB{145 85 253}" }}>remove</Button>
+              <Button onClick={handleRemoveCartItem} sx={{ color: "RGB{145 85 253}" }}>remove</Button>
             </div>
           </div>
-
         </div>
       </div>
-    </div>
+    </div >
   )
 }
+
+CartItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    size: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    discountedPrice: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    product: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      brand: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      discountPercent: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default CartItem

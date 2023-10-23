@@ -14,12 +14,12 @@ export const addToCart = (reqData) => async (dispatch) => {
 };
 
 // Action for removing from cart item
-export const removeCartItem = (reqData) => async (dispatch) => {
+export const removeCartItem = (cartItemId) => async (dispatch) => {
 
     dispatch({ type: REMOVE_FROM_CART_REQUEST });
     try {
-        const { data } = await api.delete(`/api/cart_items/${reqData.cartItemId}`)
-        dispatch({ type: REMOVE_FROM_CART_SUCCESS, payload: data })
+        await api.delete(`/api/cart_items/${cartItemId}`)
+        dispatch({ type: REMOVE_FROM_CART_SUCCESS, payload: cartItemId })
     } catch (error) {
         dispatch({ type: REMOVE_FROM_CART_FAILURE, payload: error.message })
     }
@@ -32,6 +32,7 @@ export const updateCartItem = (reqData) => async (dispatch) => {
     try {
         const { data } = await api.put(`/api/cart_items/${reqData.cartItemId}`, reqData.data)
         dispatch({ type: UPDATE_CART_ITEM_SUCCESS, payload: data })
+        // console.log(data) TODO: Fix this
     } catch (error) {
         dispatch({ type: UPDATE_CART_ITEM_FAILURE, payload: error.message })
     }
