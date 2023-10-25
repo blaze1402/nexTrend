@@ -1,48 +1,62 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, TextField } from '@mui/material'
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 import AddressCard from '../AddressCard/AddressCard'
+import { createOrder } from '../../State/Order/Action';
 
 const DeliveryAddressForm = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { auth } = useSelector(store => store)
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const data = new FormData(e.currentTarget);
-
         const address = {
             firstName: data.get("firstName"),
             lastName: data.get('lastName'),
             streetAddress: data.get('address'),
             city: data.get('city'),
             state: data.get('state'),
-            zip: data.get('zip'),
+            zipCode: data.get('zip'),
             mobile: data.get('phoneNumber')
         }
 
-        console.log('address', address)
+        const orderData = { address, navigate }
+        dispatch(createOrder(orderData))
     }
+
     return (
-        <div>
-            <Grid container spacing={4}>
-                <Grid xs={12} lg={5} className='border rounded-md shadow-md h-[30.5rem] overflow-y-scroll'>
-
-                    <div className='p-5 py-7 border-b cursor-pointer'>
-
-                        <AddressCard />
-                        <Button sx={{ mt: 2, bgcolor: "RGB(145 85 253)" }} size='large' variant='contained'>Deliver Here</Button>
+        <div className='-mt-12 mb-7'>
+            <Grid container spacing={4} >
+                <Grid item xs={12} lg={5}>
+                    <div className='h-[542px] border rounded-md shadow-md p-5 overflow-y-scroll'>
+                        <p className='text-2xl font-semibold pb-5 text-gray-700'>Saved addresses:</p>
+                        {auth.user?.address.map((address) =>
+                            <div
+                                key={address.id}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const orderData = { address, navigate }
+                                    dispatch(createOrder(orderData))
+                                }}
+                                className='border rounded-md shadow-md p-3 mb-5 hover:cursor-pointer hover:bg-slate-50' >
+                                <AddressCard address={address} />
+                            </div>)}
                     </div>
-
                 </Grid>
 
                 <Grid item xs={12} lg={7}>
 
-                    <Box className="border rounded-s-md shadow-md p-5">
+                    <Box className="border rounded-md shadow-md p-5">
 
                         <form onSubmit={handleSubmit}>
+                            <p className='text-2xl font-semibold pb-5 text-gray-700'>Enter address details:</p>
                             <Grid container spacing={3}>
                                 <Grid item xs={12} sm={6}>
-
                                     <TextField
                                         required
                                         id='firstName'

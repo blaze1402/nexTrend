@@ -35,10 +35,23 @@ public class OrderServiceImplementation implements OrderService {
     @Override
     public Order createOrder(User user, Address shippingAddress) {
 
-        shippingAddress.setUser(user);
-        Address address = addressRepository.save(shippingAddress);
-        user.getAddress().add(address);
-        userRepository.save(user);
+        Address existingAddress = addressRepository.findByAddressId(shippingAddress.getId());
+
+        if (existingAddress != null) {
+            // Address exists, use the existing one
+            shippingAddress = existingAddress;
+        } else {
+            // Address doesn't exist, save it
+            shippingAddress.setUser(user);
+            shippingAddress = addressRepository.save(shippingAddress);
+            user.getAddress().add(shippingAddress);
+            userRepository.save(user);
+        }
+
+//        shippingAddress.setUser(user);
+//        Address address = addressRepository.save(shippingAddress);
+//        user.getAddress().add(address);
+//        userRepository.save(user);
 
         Cart cart = cartService.findUserCart(user.getId());
         List<OrderItem> orderItems = new ArrayList<>();
@@ -66,7 +79,7 @@ public class OrderServiceImplementation implements OrderService {
         createdOrder.setDiscount(cart.getDiscount());
         createdOrder.setTotalItem(cart.getTotalItem());
 
-        createdOrder.setShippingAddress(address);
+        createdOrder.setShippingAddress(shippingAddress);
         createdOrder.setOrderDate(LocalDateTime.now());
         createdOrder.setOrderStatus("PENDING");
         createdOrder.getPaymentDetails().setPaymentStatus("PENDING");

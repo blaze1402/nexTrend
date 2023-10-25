@@ -20,15 +20,17 @@ const Cart = () => {
   }, [dispatch, cart.removeCartItem, cart.updateCartItem])
 
   return (
-    <div>
+    <div className='-mt-7'>
       <div className='lg:grid grid-cols-3 lg:px-16 relative'>
         <div className='col-span-2'>
-          {cart.cart?.cartItems.length === 0 ? <p className='font-bold text-gray-700 text-3xl'>Cart is empty! ☹</p> :
-            cart.cart?.cartItems.map((item) => <CartItem item={item} key={item.id} />)}
+          {cart.cart?.cartItems.length === 0
+            ? <p className='font-bold text-gray-700 text-3xl'>Cart is empty! ☹</p>
+            : <p className='font-bold text-gray-700 text-3xl'>Items in your cart:</p>}
+          {cart.cart?.cartItems.map((item) => <CartItem item={item} key={item.id} />)}
         </div>
 
-        <div className='px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0'>
-          <div className='border p-4'>
+        <div className='pl-5 sticky top-0 h-[100vh] mt-5 lg:mt-5'>
+          <div className='border p-4 rounded-md'>
             <p className='uppercase font-bold opacity-60 pb-4'>Price details</p>
             <hr />
             <div className='space-y-3 font-semibold mb-5'>

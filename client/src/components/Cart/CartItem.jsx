@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 import { removeCartItem, updateCartItem } from '../../State/Cart/Action';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, summary }) => {
   const dispatch = useDispatch()
 
   const handleUpdateCartItem = (num) => {
@@ -22,7 +22,7 @@ const CartItem = ({ item }) => {
   }
 
   return (
-    <div className='p-5 shadow-lg border rounded-md'>
+    <div className='p-5 my-5 shadow-lg border rounded-md'>
       <div className='flex items-center'>
         <Link to={`/product/${item.product.id}`}>
           <div className='w-[5rem] h-[5rem] lg:w-[9rem] lg:h-[9rem]'>
@@ -42,26 +42,29 @@ const CartItem = ({ item }) => {
             <p className='text-green-600 font-semibold'>{item.product.discountPercent}% Off</p>
           </div>
 
-          <div className='lg:flex items-center lg:space-x-10 pt-4'>
-            <div className='flex items-center space-x-2'>
-              <IconButton onClick={() => handleUpdateCartItem(-1)} disabled={item.quantity <= 1}>
-                <RemoveCircleOutlineIcon />
-              </IconButton>
-              <span className='py-1 px-7 border rounded-sm'>{item.quantity}</span>
-              <IconButton
-                sx={{ color: "RGB{145 85 253}" }}
-                onClick={() => handleUpdateCartItem(1)}
-              >
-                <AddCircleOutlineIcon />
-              </IconButton>
+          {!summary ?
+            <div className='lg:flex items-center lg:space-x-10 pt-4'>
+              <div className='flex items-center space-x-2'>
+                <IconButton onClick={() => handleUpdateCartItem(-1)} disabled={item.quantity <= 1}>
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
+                <span className='py-1 px-7 border rounded-sm'>{item.quantity}</span>
+                <IconButton
+                  sx={{ color: "RGB{145 85 253}" }}
+                  onClick={() => handleUpdateCartItem(1)}
+                >
+                  <AddCircleOutlineIcon />
+                </IconButton>
+              </div>
+              <div>
+                <Button onClick={handleRemoveCartItem} sx={{ color: "RGB{145 85 253}" }}>remove</Button>
+              </div>
             </div>
-            <div>
-              <Button onClick={handleRemoveCartItem} sx={{ color: "RGB{145 85 253}" }}>remove</Button>
-            </div>
-          </div>
+            : <p className='opacity-70 pt-4'>Quantity: <span className='font-semibold'>{item.quantity}</span></p>
+          }
         </div>
       </div>
-    </div >
+    </div>
   )
 }
 
@@ -81,6 +84,7 @@ CartItem.propTypes = {
       discountPercent: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
+  summary: PropTypes.bool,
 };
 
 export default CartItem

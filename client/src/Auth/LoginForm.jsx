@@ -17,7 +17,7 @@ const LoginForm = () => {
     if (jwt) {
       dispatch(getUser(jwt))
     }
-  }, [jwt, auth.jwt, dispatch])
+  }, [jwt, auth.jwt])
 
 
   const handleSubmit = (e) => {
@@ -30,8 +30,6 @@ const LoginForm = () => {
       password: data.get("password")
     }
     dispatch(login(userData))
-    console.log("userData", userData)
-
   }
 
   return (
