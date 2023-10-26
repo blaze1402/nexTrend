@@ -6,6 +6,7 @@ import { Button } from '@mui/material'
 import CartItem from '../Cart/CartItem'
 import AddressCard from '../AddressCard/AddressCard'
 import { getOrderById } from '../../State/Order/Action'
+import { createPayment } from '../../State/Payment/Action'
 
 const OrderSummary = () => {
   const dispatch = useDispatch()
@@ -20,7 +21,7 @@ const OrderSummary = () => {
   }, [orderId])
 
   const handleCheckout = () => {
-    console.log('checkout')
+    dispatch(createPayment(orderId))
   }
 
   return (

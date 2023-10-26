@@ -9,7 +9,6 @@ const AddressCard = ({ address }) => {
         <div className='space-y-1'>
           <p className='font-semibold'>Phone Number</p>
           <p>{address?.mobile}</p>
-          <p></p>
         </div>
       </div>
     </div>
