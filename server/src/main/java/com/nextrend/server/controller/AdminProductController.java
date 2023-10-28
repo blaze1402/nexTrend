@@ -41,12 +41,10 @@ public class AdminProductController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Product>> findAllProducts(){
+    public ResponseEntity<List<Product>> findAllProducts() {
 
-//        List<Product> products=productService.findAllProducts();
-//        return new ResponseEntity<>(products, HttpStatus.OK);
-        // TODO: findAllproducts()
-        return null;
+        List<Product> products = productService.findAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @PutMapping("/{productId}/update")
@@ -58,9 +56,9 @@ public class AdminProductController {
     }
 
     @PostMapping("/creates")
-    public ResponseEntity<ApiResponse> createMultipleProduct(@RequestBody CreateProductRequest[] req){
+    public ResponseEntity<ApiResponse> createMultipleProduct(@RequestBody CreateProductRequest[] req) {
 
-        for (CreateProductRequest product:req){
+        for (CreateProductRequest product : req) {
             productService.createProduct(product);
         }
         ApiResponse res = new ApiResponse();
