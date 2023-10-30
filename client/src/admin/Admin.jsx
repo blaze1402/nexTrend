@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useTheme, useMediaQuery, Box, List, ListItem, ListItemButton, ListItemIcon, CssBaseline, ListItemText } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, ListItemIcon, CssBaseline, ListItemText } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import DevicesIcon from '@mui/icons-material/Devices';
@@ -18,7 +17,7 @@ const menu = [
   { name: "Products", path: "/admin/products", icon: <DevicesIcon /> },
   { name: "Customers", path: "/admin/customers", icon: <AccountBoxIcon /> },
   { name: "Orders", path: "/admin/orders", icon: <ListAltIcon /> },
-  { name: "AddProduct", path: "/admin/product/create", icon: <PostAddIcon /> }
+  { name: "Add Product", path: "/admin/product/create", icon: <PostAddIcon /> }
 ]
 
 const Admin = () => {
@@ -68,10 +67,10 @@ const Admin = () => {
     <div>
       <div className="flex h-screen">
         <CssBaseline />
-        <div className="pl-2 w-[15%] border border-r-gray-300 h-full">
+        <div className="pl-2 w-[15%] border border-r-gray-300 fixed top-0 h-full">
           {drawer}
         </div>
-        <div className="w-[85%]">
+        <div className="w-[85%] h-full ml-[15%]">
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
             <Route path="/product/create" element={<CreateProductForm />}></Route>

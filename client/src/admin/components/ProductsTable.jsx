@@ -10,7 +10,6 @@ const ProductsTable = () => {
 
   useEffect(() => {
     dispatch(findAllProducts())
-    console.log(product)
   }, [product.deletedProduct, product.products.length])
 
   const handleProductDelete = (productId) => () => {
