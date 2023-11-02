@@ -58,7 +58,7 @@ const CreateProductForm = () => {
   }
 
   return (
-    <div className="p-10">
+    <div className="p-10 bg-white">
       <Typography
         variant="h3"
         sx={{ textAlign: "center" }}

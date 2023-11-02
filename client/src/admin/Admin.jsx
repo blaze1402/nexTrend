@@ -6,6 +6,7 @@ import DevicesIcon from '@mui/icons-material/Devices';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import Dashboard from "./components/dashboard";
 import CreateProductForm from "./components/createProductForm";
 import ProductsTable from "./components/productsTable";
@@ -35,12 +36,14 @@ const Admin = () => {
         flexDirection: 'column',
         justifyContent: 'space-between',
         height: '100%',
+        color: 'white',
+        bgcolor: '#0d0d22',
       }}>
       {/* {isLargeScreen && <Toolbar />} */}
       <List>
         {menu.map((item) => <ListItem key={item.name} disablePadding onClick={() => navigate(item.path)}>
-          <ListItemButton>
-            <ListItemIcon className="-mr-5">
+          <ListItemButton disabled={item.name==="Customers"}>
+            <ListItemIcon sx={{ color: 'white' }} className="-mr-5">
               {item.icon}
             </ListItemIcon>
             <ListItemText>{item.name}</ListItemText>
@@ -51,9 +54,9 @@ const Admin = () => {
 
       <List>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton disabled>
             <ListItemIcon>
-              <AccountCircleIcon />
+              <AccountCircleIcon sx={{ color: 'white' }} />
             </ListItemIcon>
             <ListItemText>Account</ListItemText>
           </ListItemButton>
@@ -65,9 +68,9 @@ const Admin = () => {
 
   return (
     <div>
-      <div className="flex h-screen">
+      <div className="flex h-full bg-[#060613]">
         <CssBaseline />
-        <div className="pl-2 w-[15%] border border-r-gray-300 fixed top-0 h-full">
+        <div className="w-[15%] border-2 rounded-md shadow-lg border-r-gray-300 fixed top-0 h-full">
           {drawer}
         </div>
         <div className="w-[85%] h-full ml-[15%]">
